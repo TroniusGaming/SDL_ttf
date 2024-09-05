@@ -421,6 +421,19 @@ extern DECLSPEC int SDLCALL TTF_SetFontSize(TTF_Font *font, int ptsize);
  */
 extern DECLSPEC int SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, int ptsize, unsigned int hdpi, unsigned int vdpi);
 
+ /**
+  * Query a font's weight class.
+  * The font weight is parsed from the OS/2 table in the font file.
+  *
+  * \param font the font to query.
+  * \returns the font's weight, or 0 if the font does not have a weight class.
+  *
+  * \since This function is available since SDL_ttf 2.22.0-tronius.
+  *
+  * \sa TTF_GetFontWeight
+  */
+ extern DECLSPEC Uint16 SDLCALL TTF_GetFontWeight(const TTF_Font *font);
+
 /**
  * Font style flags
  */
