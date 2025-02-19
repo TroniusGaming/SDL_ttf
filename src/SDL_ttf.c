@@ -5707,7 +5707,7 @@ void TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
 
 Uint16 TTF_GetFontWeight(const TTF_Font *font)
 {
-    TTF_CHECK_POINTER(font, -1);
+    TTF_CHECK_FONT(font, -1);
     // Access the OS/2 table
     TT_OS2* os2Table = (TT_OS2*)FT_Get_Sfnt_Table(font->face, ft_sfnt_os2);
     if (os2Table) {
