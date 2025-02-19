@@ -32,6 +32,7 @@
 #include FT_GLYPH_H
 #include FT_TRUETYPE_IDS_H
 #include FT_IMAGE_H
+#include FT_TRUETYPE_TABLES_H  // Needed for accessing the OS/2 table
 
 /* Enable rendering with color
  * Freetype may need to be compiled with FT_CONFIG_OPTION_USE_PNG */
@@ -5702,6 +5703,18 @@ void TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
         Flush_Cache(font);
     }
     UpdateFontText(font, NULL);
+}
+
+Uint16 TTF_GetFontWeight(const TTF_Font *font)
+{
+    TTF_CHECK_POINTER(font, -1);
+    // Access the OS/2 table
+    TT_OS2* os2Table = (TT_OS2*)FT_Get_Sfnt_Table(font->face, ft_sfnt_os2);
+    if (os2Table) {
+        return os2Table->usWeightClass;
+    } else {
+        return 0;
+    }
 }
 
 TTF_FontStyleFlags TTF_GetFontStyle(const TTF_Font *font)
